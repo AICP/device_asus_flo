@@ -130,13 +130,15 @@ const int32_t available_thumbnail_sizes[] = {512, 288, 480, 288, 256, 154, 432, 
                                              320, 240, 176, 144, 0, 0};
 
 camera3_device_ops_t QCamera3HardwareInterface::mCameraOps = {
-    initialize:                         QCamera3HardwareInterface::initialize,
-    configure_streams:                  QCamera3HardwareInterface::configure_streams,
-    register_stream_buffers:            QCamera3HardwareInterface::register_stream_buffers,
-    construct_default_request_settings: QCamera3HardwareInterface::construct_default_request_settings,
-    process_capture_request:            QCamera3HardwareInterface::process_capture_request,
-    get_metadata_vendor_tag_ops:        QCamera3HardwareInterface::get_metadata_vendor_tag_ops,
-    dump:                               QCamera3HardwareInterface::dump,
+    .initialize =                         QCamera3HardwareInterface::initialize,
+    .configure_streams =                  QCamera3HardwareInterface::configure_streams,
+    .register_stream_buffers =            QCamera3HardwareInterface::register_stream_buffers,
+    .construct_default_request_settings = QCamera3HardwareInterface::construct_default_request_settings,
+    .process_capture_request =            QCamera3HardwareInterface::process_capture_request,
+    .get_metadata_vendor_tag_ops =        QCamera3HardwareInterface::get_metadata_vendor_tag_ops,
+    .dump =                               QCamera3HardwareInterface::dump,
+    .flush =                              QCamera3HardwareInterface::flush,
+    .reserved =                           {0},
 };
 
 
@@ -549,7 +551,15 @@ int QCamera3HardwareInterface::configureStreams(
                     GRALLOC_USAGE_HW_CAMERA_WRITE;
                 break;
             case CAMERA3_STREAM_OUTPUT:
-                newStream->usage = GRALLOC_USAGE_HW_CAMERA_WRITE;
+                /* For video encoding stream, set read/write rarely
+                 * flag so that they may be set to un-cached */
+                if (newStream->usage & GRALLOC_USAGE_HW_VIDEO_ENCODER)
+                    newStream->usage =
+                         (GRALLOC_USAGE_SW_READ_RARELY |
+                         GRALLOC_USAGE_SW_WRITE_RARELY |
+                         GRALLOC_USAGE_HW_CAMERA_WRITE);
+                else
+                    newStream->usage = GRALLOC_USAGE_HW_CAMERA_WRITE;
                 break;
             default:
                 ALOGE("%s: Invalid stream_type %d", __func__, newStream->stream_type);
@@ -1049,6 +1059,26 @@ void QCamera3HardwareInterface::dump(int /*fd*/)
     return;
 }
 
+/*===========================================================================
+ * FUNCTION   : flush
+ *
+ * DESCRIPTION:
+ *
+ * PARAMETERS :
+ *
+ *
+ * RETURN     :
+ *==========================================================================*/
+int QCamera3HardwareInterface::flush()
+{
+    /*Enable lock when we implement this function*/
+    /*
+    pthread_mutex_lock(&mMutex);
+
+    pthread_mutex_unlock(&mMutex);
+    */
+    return 0;
+}
 
 /*===========================================================================
  * FUNCTION   : captureResultCb
@@ -2537,7 +2567,7 @@ int QCamera3HardwareInterface::getCamInfo(int cameraId,
 
 
     info->orientation = gCamCapability[cameraId]->sensor_mount_angle;
-    info->device_version = HARDWARE_DEVICE_API_VERSION(3, 0);
+    info->device_version = CAMERA_DEVICE_API_VERSION_3_0;
     info->static_camera_characteristics = gStaticMetadata[cameraId];
 
     return rc;
@@ -3598,6 +3628,34 @@ void QCamera3HardwareInterface::dump(
     hw->dump(fd);
     ALOGV("%s: X", __func__);
     return;
+}
+
+/*===========================================================================
+ * FUNCTION   : flush
+ *
+ * DESCRIPTION:
+ *
+ * PARAMETERS :
+ *
+ *
+ * RETURN     :
+ *==========================================================================*/
+
+int QCamera3HardwareInterface::flush(
+                const struct camera3_device *device)
+{
+    int rc;
+    ALOGV("%s: E", __func__);
+    QCamera3HardwareInterface *hw =
+        reinterpret_cast<QCamera3HardwareInterface *>(device->priv);
+    if (!hw) {
+        ALOGE("%s: NULL camera device", __func__);
+        return -EINVAL;
+    }
+
+    rc = hw->flush();
+    ALOGV("%s: X", __func__);
+    return rc;
 }
 
 /*===========================================================================

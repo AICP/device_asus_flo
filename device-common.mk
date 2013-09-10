@@ -27,7 +27,6 @@ endif
 
 PRODUCT_COPY_FILES := \
 	$(LOCAL_KERNEL):kernel
-endif
 
 # This device is xhdpi.  However the platform doesn't
 # currently contain all of the bitmaps at xhdpi density so

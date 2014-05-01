@@ -496,7 +496,6 @@ QCamera3RegularChannel::QCamera3RegularChannel(uint32_t cam_handle,
  *==========================================================================*/
 QCamera3RegularChannel::~QCamera3RegularChannel()
 {
-    mCamera3Buffers.clear();
 }
 
 /*===========================================================================
@@ -585,7 +584,7 @@ int32_t QCamera3RegularChannel::start()
 {
     int32_t rc = NO_ERROR;
 
-    if (0 < mCamera3Buffers.size()) {
+    if (0 < mMemory.getCnt()) {
         rc = QCamera3Channel::start();
     }
 
@@ -675,7 +674,7 @@ int32_t QCamera3RegularChannel::registerBuffer(buffer_handle_t *buffer)
 {
     int rc = 0;
 
-    if (mCamera3Buffers.size() > (mNumBufs - 1)) {
+    if ((uint32_t)mMemory.getCnt() > (mNumBufs - 1)) {
         ALOGE("%s: Trying to register more buffers than initially requested",
                 __func__);
         return BAD_VALUE;
@@ -697,8 +696,6 @@ int32_t QCamera3RegularChannel::registerBuffer(buffer_handle_t *buffer)
         ALOGE("%s: Buffer %p couldn't be registered %d", __func__, buffer, rc);
         return rc;
     }
-
-    mCamera3Buffers.add(buffer);
 
     return rc;
 }
@@ -738,7 +735,7 @@ void QCamera3RegularChannel::streamCbRoutine(
     }
 
     ////Use below data to issue framework callback
-    resultBuffer = mCamera3Buffers[frameIndex];
+    resultBuffer = (buffer_handle_t *)mMemory.getBufferHandle(frameIndex);
     resultFrameNumber = mMemory.getFrameNumber(frameIndex);
 
     result.stream = mCamera3Stream;
@@ -938,7 +935,7 @@ void QCamera3PicChannel::jpegEvtHandle(jpeg_job_status_t status,
         obj->mMemory.cleanInvalidateCache(obj->mCurrentBufIndex);
 
         ////Use below data to issue framework callback
-        resultBuffer = obj->mCamera3Buffers[obj->mCurrentBufIndex];
+        resultBuffer = (buffer_handle_t *)obj->mMemory.getBufferHandle(obj->mCurrentBufIndex);
         resultFrameNumber = obj->mMemory.getFrameNumber(obj->mCurrentBufIndex);
 
         result.stream = obj->mCamera3Stream;
@@ -994,8 +991,6 @@ QCamera3PicChannel::~QCamera3PicChannel()
     if (rc != 0) {
         ALOGE("De-init Postprocessor failed");
     }
-
-    mCamera3Buffers.clear();
 }
 
 int32_t QCamera3PicChannel::initialize()
@@ -1156,7 +1151,7 @@ int32_t QCamera3PicChannel::registerBuffer(buffer_handle_t *buffer)
 {
     int rc = 0;
 
-    if (mCamera3Buffers.size() > (mNumBufs - 1)) {
+    if ((uint32_t)mMemory.getCnt() > (mNumBufs - 1)) {
         ALOGE("%s: Trying to register more buffers than initially requested",
                 __func__);
         return BAD_VALUE;
@@ -1178,8 +1173,6 @@ int32_t QCamera3PicChannel::registerBuffer(buffer_handle_t *buffer)
         ALOGE("%s: Buffer %p couldn't be registered %d", __func__, buffer, rc);
         return rc;
     }
-
-    mCamera3Buffers.add(buffer);
 
     return rc;
 }

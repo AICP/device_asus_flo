@@ -86,6 +86,7 @@
 /system/lib/libdss.so
 /system/lib/libdsucsd.so
 /system/lib/libdsutils.so
+/system/lib/libDxHdcp.so
 /system/lib/libgps.utils.so
 /system/lib/libgsl.so
 /system/lib/libI420colorconvert.so

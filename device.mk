@@ -24,14 +24,43 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_COPY_FILES := \
     device/asus/flo/fstab.flo:root/fstab.flo \
-    device/asus/flo/init.flo.rc:root/init.flo.rc
+    device/asus/flo/init.flo.rc:root/init.flo.rc \
+    device/asus/flo/fstab/fstab.flo.all-EXT4:system/extras/fstab/fstab.flo.all-EXT4 \
+    device/asus/flo/fstab/fstab.flo.all-F2FS:system/extras/fstab/fstab.flo.all-F2FS \
+    device/asus/flo/fstab/fstab.flo.data-F2FS:system/extras/fstab/fstab.flo.data-F2FS \
+    device/asus/flo/tools/repack-and-flash.sh:system/extras/tools/repack-and-flash.sh \
+    device/asus/flo/tools/format-system.sh:system/extras/tools/format-system.sh \
+    device/asus/flo/tools/kernel/repackimg.sh:system/extras/tools/kernel/repackimg.sh \
+    device/asus/flo/tools/kernel/unpackimg.sh:system/extras/tools/kernel/unpackimg.sh \
+    device/asus/flo/tools/kernel/cleanup.sh:system/extras//tools/kernel/cleanup.sh \
+    device/asus/flo/tools/kernel/authors.txt:system/extras/tools/kernel/authors.txt \
+    device/asus/flo/tools/kernel/bin/aik:system/extras/tools/kernel/bin/aik \
+    device/asus/flo/tools/kernel/bin/busybox:system/extras/tools/kernel/bin/busybox \
+    device/asus/flo/tools/kernel/bin/file:system/extras/tools/kernel/bin/file \
+    device/asus/flo/tools/kernel/bin/lz4:system/extras/tools/kernel/bin/lz4 \
+    device/asus/flo/tools/kernel/bin/magic:system/extras/tools/kernel/bin/magic \
+    device/asus/flo/tools/kernel/bin/mkbootfs:system/extras/tools/kernel/bin/mkbootfs \
+    device/asus/flo/tools/kernel/bin/mkbootimg:system/extras/tools/kernel/bin/mkbootimg \
+    device/asus/flo/tools/kernel/bin/unpackbootimg:system/extras/tools/kernel/bin/unpackbootimg \
+    device/asus/flo/tools/kernel/bin/xz:system/extras/tools/kernel/bin/xz
 
 PRODUCT_PACKAGES += \
-	camera.flo
+    camera.flo
 
 # NFC
 PRODUCT_PACKAGES += \
     nfc_nci.flo
+
+# F2FS
+PRODUCT_PACKAGES += \
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    setup_fs \
+    e2fsck
 
 # the actual meat of the device-specific product definition
 $(call inherit-product, device/asus/flo/device-common.mk)

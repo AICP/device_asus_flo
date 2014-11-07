@@ -11,4 +11,3 @@ ro.device.gpu=Qualcomm Adreno 320
 ro.device.rear_cam=5 MP
 ro.device.front_cam=1.2 MP
 ro.device.screen_res=1920x1200
-

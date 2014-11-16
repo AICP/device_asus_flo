@@ -5,8 +5,8 @@
    "branch":      "lp5.0"
   },
   {
-   "repository":  "AICP/kernel_asus_flo",
-   "target_path": "kernel/asus/flo",
+   "repository":  "AICP/kernel_google_msm",
+   "target_path": "kernel/google/msm",
    "branch":      "lp5.0"
   },
   {

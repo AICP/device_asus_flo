@@ -152,3 +152,6 @@ USE_MINIKIN := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
+
+# Flag for ION Compatibility
+TARGET_USE_ION_COMPAT := true

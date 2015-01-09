@@ -27,9 +27,14 @@ on init
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
+    # USB storage
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0700 root root
+
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE /storage/usbdisk
 
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
@@ -127,8 +132,11 @@ on boot
 
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
 # Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  1220608
-    write /proc/sys/net/core/wmem_max  1220608
+    write /proc/sys/net/core/rmem_max  2097152
+    write /proc/sys/net/core/wmem_max  2097152
+
+# Tune buffersize for higher Miracast throughput
+    setprop net.tcp.buffersize.wifi 524288,1048576,2560000,524288,1048576,2560000
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -226,25 +234,47 @@ on post-fs-data
     write /sys/module/rpm_resources/enable_low_power/pxo 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 0
+    write /sys/module/pm_8x60/modes/cpu1/retention/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu2/retention/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu3/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 60
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
-    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
+    # write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+    # write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
+    # write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
+    # write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+    # write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
+    # write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 60
+    # write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
+    # write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
+    # write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
+    # write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 90000
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1134000
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 30000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
+    write /sys/devices/system/cpu/cpufreq/interactive/sync_freq 1026000
+    write /sys/devices/system/cpu/cpufreq/interactive/sync_freq_load_threshold 80
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq 1134000
+    write /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load 70
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 384000
@@ -427,6 +457,16 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
+service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
@@ -439,6 +479,11 @@ service charger /sbin/healthd -c
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
+
+# USB-OTG storage daemon
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+    class late_start
+    disabled
 
 service thermald /system/bin/thermald
     class main
@@ -483,8 +528,6 @@ service qseecomd /system/bin/qseecomd
 service diag_mdlog /system/bin/diag_mdlog -s 100
     class late_start
     disabled
-
-
 
 # on property:gsm.sim.state=READY
 #    start diag_mdlog

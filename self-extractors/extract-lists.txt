@@ -69,6 +69,7 @@
             system/lib/libchromatix_ov5693_default_video.so \
             system/lib/libchromatix_ov5693_preview.so \
             system/lib/libCommandSvc.so \
+            system/lib/libDxHdcp.so \
             system/lib/libconfigdb.so \
             system/lib/libcsd-client.so \
             system/lib/libdiag.so \

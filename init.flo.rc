@@ -225,6 +225,23 @@ on post-fs-data
     # adjust vibrator amplitude
     write /sys/class/timed_output/vibrator/amp 70
 
+    # Wake Gestures
+    chown system system /sys/android_touch/doubletap2wake
+    chmod 0644 /sys/android_touch/doubletap2wake
+    restorecon /sys/android_touch/doubletap2wake
+    chown system system /sys/android_touch/sweep2wake
+    chmod 0644 /sys/android_touch/sweep2wake
+    restorecon /sys/android_touch/sweep2wake
+    chown system system /sys/android_touch/shortsweep
+    chmod 0644 /sys/android_touch/shortsweep
+    restorecon /sys/android_touch/shortsweep
+    chown system system /sys/android_touch/lid_suspend
+    chmod 0644 /sys/android_touch/lid_suspend
+    restorecon /sys/android_touch/lid_suspend
+    chown system system /sys/android_touch/orientation
+    chmod 0644 /sys/android_touch/orientation
+    restorecon /sys/android_touch/orientation
+
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
     write /sys/module/rpm_resources/enable_low_power/pxo 1

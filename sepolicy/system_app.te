@@ -1,0 +1,6 @@
+allow system_app sysfs_display:file rw_file_perms;
+allow system_app doubletap2wake_dev:file rw_file_perms;
+allow system_app sweep2wake_dev:file rw_file_perms;
+allow system_app shortsweep_dev:file rw_file_perms;
+allow system_app lid_suspend_dev:file rw_file_perms;
+allow system_app orientation_dev:file rw_file_perms;

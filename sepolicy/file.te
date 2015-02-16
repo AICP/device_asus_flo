@@ -24,3 +24,11 @@ type persist_wifi_file, file_type;
 type sysfs_rmnet, fs_type, sysfs_type;
 type sysfs_mpdecision, fs_type, sysfs_type;
 type sysfs_surfaceflinger, fs_type, sysfs_type;
+
+# CMHW Tunables
+type sysfs_display, fs_type, sysfs_type;
+type doubletap2wake_dev, fs_type, sysfs_type;
+type sweep2wake_dev, fs_type, sysfs_type;
+type shortsweep_dev, fs_type, sysfs_type;
+type lid_suspend_dev, fs_type, sysfs_type;
+type orientation_dev, fs_type, sysfs_type;

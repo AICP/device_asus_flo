@@ -21,4 +21,7 @@
     <!-- Show dock settings when docked -->
     <bool name="has_dock_settings">true</bool>
 
+    <!-- Wake gestures -->
+    <bool name="config_wake_gestures_available">true</bool>
+
 </resources>

@@ -146,6 +146,7 @@ BOARD_SEPOLICY_UNION += \
         rmt.te \
         sensors.te \
         surfaceflinger.te \
+        system_app.te \
         system_server.te \
         tee.te \
         te_macros \
@@ -157,5 +158,8 @@ USE_MINIKIN := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
+
+# CMHW
+BOARD_HARDWARE_CLASS := device/asus/flo/cmhw
 
 -include vendor/asus/flo/BoardConfigVendor.mk

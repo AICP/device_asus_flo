@@ -266,6 +266,7 @@ on property:sys.boot_completed=0
 
 # CM Performance Profiles
 on property:sys.perf.profile=0
+    start mpdecision
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
@@ -278,9 +279,10 @@ on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
-    start mpdecision
+    write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "ondemand"
 
 on property:sys.perf.profile=1
+    start mpdecision
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
@@ -293,7 +295,7 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
-    start mpdecision
+    write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "ondemand"
 
 on property:sys.perf.profile=2
     stop mpdecision
@@ -309,6 +311,7 @@ on property:sys.perf.profile=2
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1836000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1836000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1836000
+    write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "performance"
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates

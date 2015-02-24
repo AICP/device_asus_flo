@@ -270,6 +270,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false
 
+# fmas props
+PRODUCT_PROPERTY_OVERRIDES += \
+    fmas.spkr_6ch=35,20,110 \
+    fmas.spkr_2ch=35,25 \
+    fmas.spkr_angles=10 \
+    fmas.spkr_sgain=0
+
+# missing props
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.media.effect.bgdropper.adj=0.2 \
+    camera.flash_off=0 \
+    ro.com.widevine.cachesize=16777216 
+
 PRODUCT_PACKAGES += \
     power.flo
 

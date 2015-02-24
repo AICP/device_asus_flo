@@ -142,3 +142,10 @@
 # Sysfs files used by surfaceflinger
 /sys/devices/virtual/graphics/fb1/format_3d -- u:object_r:sysfs_surfaceflinger:s0
 /sys/devices/virtual/graphics/fb1/hpd       -- u:object_r:sysfs_surfaceflinger:s0
+
+# for Settings' access to Wake Gestures
+/sys/android_touch/doubletap2wake              u:object_r:sysfs_hardware:s0
+/sys/android_touch/sweep2wake              u:object_r:sysfs_hardware:s0
+/sys/android_touch/shortsweep              u:object_r:sysfs_hardware:s0
+/sys/android_touch/lid_suspend              u:object_r:sysfs_hardware:s0
+/sys/android_touch/orientation              u:object_r:sysfs_hardware:s0

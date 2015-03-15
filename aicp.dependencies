@@ -2,11 +2,11 @@
   {
    "repository":  "AICP/kernel_google_msm",
    "target_path": "kernel/google/msm",
-   "branch":      "lp5.0"
+   "branch":      "lp5.1"
   },
   {
    "repository":  "AICP/proprietary_vendor_asus",
    "target_path": "vendor/asus",
-   "branch":      "lp5.0"
+   "branch":      "lp5.1"
   }
 ]

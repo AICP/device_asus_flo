@@ -89,10 +89,6 @@ on boot
     chown system system /sys/devices/virtual/graphics/fb1/format_3d
     chown system system /sys/devices/virtual/graphics/fb1/hpd
 
-    # Display Calibration Tools
-    chown system system /sys/devices/virtual/graphics/fb0/rgb
-    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
-
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 

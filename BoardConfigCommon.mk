@@ -155,9 +155,6 @@ BOARD_SEPOLICY_UNION += \
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
-# CMHW
-BOARD_HARDWARE_CLASS += device/asus/flo/cmhw
-
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 

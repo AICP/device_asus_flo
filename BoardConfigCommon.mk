@@ -158,6 +158,6 @@ USE_MINIKIN := true
 EXTENDED_FONT_FOOTPRINT := true
 
 # Enable transparent compression in the build
-# TARGET_TRANSPARENT_COMPRESSION_METHOD := lz4
+TARGET_TRANSPARENT_COMPRESSION_METHOD := lz4
 
 -include vendor/asus/flo/BoardConfigVendor.mk

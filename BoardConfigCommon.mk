@@ -158,4 +158,7 @@ USE_MINIKIN := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+# CMHW
+BOARD_HARDWARE_CLASS := device/asus/flo/cmhw
+
 -include vendor/asus/flo/BoardConfigVendor.mk

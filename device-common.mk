@@ -294,6 +294,10 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag
 
+# Doze
+PRODUCT_PACKAGES += \
+    AsusDoze
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \

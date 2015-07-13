@@ -276,15 +276,19 @@ on post-fs-data
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
 
-    # post boot
-    setprop sys.perf.profile 1
-
-on property:sys.boot_completed=0
+on property:init.svc.bootanim=running
+    # Switch to NOOP and performance mode while booting
     setprop sys.perf.profile 2
+    write /sys/block/mmcblk0/queue/scheduler noop
+
+on property:init.svc.bootanim=stopped
+    # Switch to fiops and balanced mode after boot for better UX
+    setprop sys.perf.profile 1
+    write /sys/block/mmcblk0/queue/scheduler fiops
 
 # CM Performance Profiles
 on property:sys.perf.profile=0
-    start mpdecision
+    stop mpdecision
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
@@ -298,9 +302,10 @@ on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
     write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "ondemand"
+    start mpdecision
 
 on property:sys.perf.profile=1
-    start mpdecision
+    stop mpdecision
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
@@ -314,6 +319,7 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
     write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "ondemand"
+    start mpdecision
 
 on property:sys.perf.profile=2
     stop mpdecision
@@ -330,9 +336,6 @@ on property:sys.perf.profile=2
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1836000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1836000
     write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "performance"
-
-on property:init.svc.bootanim=stopped
-    write /sys/block/mmcblk0/queue/scheduler row
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates

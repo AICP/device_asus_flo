@@ -332,7 +332,7 @@ on property:sys.perf.profile=2
     write /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor "performance"
 
 on property:init.svc.bootanim=stopped
-    write /sys/block/mmcblk0/queue/scheduler row
+    write /sys/block/mmcblk0/queue/scheduler fiops
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates

@@ -133,6 +133,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.audio.fluence.mode=endfire \
 	persist.audio.lowlatency.rec=false
 
+# ART
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-flags=--no-watch-dog
+
 # Camera Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
 	camera.disable_zsl_mode=1

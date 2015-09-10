@@ -66,6 +66,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/asus/flo/init.flo.usb.rc:root/init.flo.usb.rc \
+	device/asus/flo/init.flo.power.rc:root/init.flo.power.rc \
 	device/asus/flo/ueventd.flo.rc:root/ueventd.flo.rc \
 	device/asus/flo/media_profiles.xml:system/etc/media_profiles.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -296,6 +297,16 @@ PRODUCT_PACKAGES += \
     libnfc_nci_jni \
     NfcNci \
     Tag
+
+on property:init.svc.bootanim=running
+    # Switch to NOOP and performance mode while booting
+    setprop sys.perf.profile 2
+    write /sys/block/mmcblk0/queue/scheduler noop
+
+on property:init.svc.bootanim=stopped
+    # Switch to fiops and balanced mode after boot for better UX
+    setprop sys.perf.profile 1
+    write /sys/block/mmcblk0/queue/scheduler fiops
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \

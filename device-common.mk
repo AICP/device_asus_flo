@@ -66,6 +66,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/asus/flo/init.flo.usb.rc:root/init.flo.usb.rc \
+	device/asus/flo/init.flo.power.rc:root/init.flo.power.rc \
 	device/asus/flo/ueventd.flo.rc:root/ueventd.flo.rc \
 	device/asus/flo/media_profiles.xml:system/etc/media_profiles.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \

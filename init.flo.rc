@@ -39,10 +39,8 @@ on init
     export SECONDARY_STORAGE /storage/usbdisk
 
     # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -51,7 +49,6 @@ on init
 on fs
     mount_all ./fstab.flo
     restorecon_recursive /persist
-    setprop ro.crypto.fuse_sdcard true
     write /sys/kernel/boot_adsp/boot 1
 
 on early-boot
@@ -138,8 +135,6 @@ on boot
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-
     chown system system /dev/wcnss_wlan
     write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
 
@@ -239,11 +234,10 @@ service rmt_storage /system/bin/rmt_storage
     user root
     group system
 
-service hciattach /system/bin/sh /system/etc/init.flo.bt.sh
+service hciattach /system/bin/init.flo.bt.sh
     class late_start
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin system net_bt_stack
-    seclabel u:r:bluetooth_loader:s0
     disabled
     oneshot
 
@@ -258,11 +252,6 @@ service bridgemgrd /system/bin/bridgemgrd
     user radio
     group radio
 
-service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
-    class main
-    user root
-    oneshot
-
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
@@ -270,9 +259,8 @@ service qmuxd /system/bin/qmuxd
     group radio audio bluetooth gps net_bt_stack
     disabled
 
-service ks_checker /system/bin/sh /system/etc/kickstart_checker.sh
+service ks_checker /system/bin/kickstart_checker.sh
     class core
-    seclabel u:r:kickstart:s0
     oneshot
 
 service kickstart /system/bin/qcks -i /firmware/image/ -r /data/tombstones/mdm/
@@ -281,10 +269,6 @@ service kickstart /system/bin/qcks -i /firmware/image/ -r /data/tombstones/mdm/
     group system
     disabled
     oneshot
-
-service asus-dbug-d /data/data/com.asus.debugger/files/asus-debugger-d
-    class late_start
-    disabled
 
 on property:gsm.radio.kickstart=on
     start kickstart
@@ -418,11 +402,10 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet input
 
-service wcnss_init /system/bin/sh /system/etc/init.flo.wifi.sh
+service wcnss_init /system/bin/init.flo.wifi.sh
     class late_start
     user system
     group system wifi
-    seclabel u:r:conn_init:s0
     oneshot
 
 service bdAddrLoader /system/bin/bdAddrLoader -f /persist/bluetooth/.bdaddr -h -x

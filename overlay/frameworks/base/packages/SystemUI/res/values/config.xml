@@ -28,11 +28,11 @@
     <!-- Vibration duration for MultiWaveView used in SearchPanelView -->
     <integer translatable="false" name="config_search_panel_view_vibration_duration">7</integer>
 
-    <!-- Doze: should the pickup sensor be used as a pulse signal? -->
-    <bool name="doze_pulse_on_pick_up">true</bool>
+    <!-- Doze: should the pickup sensor be used as a pulse signal?
+    <bool name="doze_pulse_on_pick_up">true</bool> -->
 
-    <!-- Doze: shake accelerometer threshold -->
-    <integer name="doze_shake_accelerometer_threshold">5</integer>
+    <!-- Doze: shake accelerometer threshold
+    <integer name="doze_shake_accelerometer_threshold">5</integer> -->
 
 </resources>
 

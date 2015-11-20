@@ -292,10 +292,6 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag
 
-# set default USB configuration
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
-
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \

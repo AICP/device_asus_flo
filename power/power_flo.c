@@ -49,7 +49,7 @@
 #define SLEEP_USEC_BETWN_RETRY 200
 #define LOW_POWER_MAX_FREQ "1026000"
 #define LOW_POWER_MIN_FREQ "384000"
-#define NORMAL_MAX_FREQ "1512000"
+#define NORMAL_MAX_FREQ "1998000"
 #define UEVENT_STRING "online@/devices/system/cpu/"
 
 static int client_sockfd;

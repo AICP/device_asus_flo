@@ -59,15 +59,15 @@ static int last_state = -1;
 static struct pollfd pfd;
 static char *cpu_path_min[] = {
     "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
-    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq",
-    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq",
-    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
 };
 static char *cpu_path_max[] = {
     "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
-    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq",
-    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq",
-    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
 };
 static bool freq_set[TOTAL_CPUS];
 static bool low_power_mode = false;

@@ -149,10 +149,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	e2fsck
-
 PRODUCT_PACKAGES += \
 	libgenlock \
 	liboverlay \
@@ -235,7 +231,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0
-	
+
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
 	media.aac_51_output_enabled=true

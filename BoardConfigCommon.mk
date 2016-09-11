@@ -131,4 +131,7 @@ EXTENDED_FONT_FOOTPRINT := true
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += hardware/cyanogen
 
+# Sensors
+TARGET_NEEDS_GCC_LIBC := true
+
 -include vendor/asus/flo/BoardConfigVendor.mk

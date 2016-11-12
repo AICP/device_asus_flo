@@ -22,6 +22,10 @@
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.carrier=wifi-only
 
+# Bluetooth
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.bluetooth.soc=smd
+
 PRODUCT_COPY_FILES := \
     device/asus/flo/fstab.flo:root/fstab.flo \
     device/asus/flo/init.flo.rc:root/init.flo.rc

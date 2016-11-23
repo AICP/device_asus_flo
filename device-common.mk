@@ -203,9 +203,9 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	libc2dcolorconvert
 
-# Gello
-PRODUCT_PACKAGES += \
-	Gello
+## Gello
+#PRODUCT_PACKAGES += \
+#	Gello
 
 # GPS
 PRODUCT_PACKAGES += \

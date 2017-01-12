@@ -18,6 +18,7 @@
 # are also specific to msm8960 devices
 #
 # Everything in this directory will become public
+$(call inherit-product-if-exists, vendor/asus/flo/flo-vendor.mk)
 
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.carrier=wifi-only
@@ -35,5 +36,8 @@ PRODUCT_PACKAGES += \
 
 # the actual meat of the device-specific product definition
 $(call inherit-product, device/asus/flo/device-common.mk)
+
+# inherit from the non-open-source side, if present
+$(call inherit-product-if-exists, vendor/asus/flo/device-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/asus/flo/overlay

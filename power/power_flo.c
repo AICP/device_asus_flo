@@ -1,4 +1,4 @@
-/*
+g/*
  * Copyright (C) 2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -282,7 +282,7 @@ static void power_hint( __attribute__((unused)) struct power_module *module,
         return;
 
     switch (hint) {
-        case POWER_HINT_LAUNCH_BOOST:
+        case POWER_HINT_LAUNCH:
         case POWER_HINT_CPU_BOOST:
             ALOGV("POWER_HINT_INTERACTION");
             touch_boost();

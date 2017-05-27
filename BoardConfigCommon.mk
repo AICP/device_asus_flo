@@ -141,4 +141,7 @@ EXTENDED_FONT_FOOTPRINT := true
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += hardware/cyanogen
 
+# Enable real time lockscreen charging current values
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
 -include vendor/asus/flo/BoardConfigVendor.mk

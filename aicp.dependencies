@@ -1,0 +1,12 @@
+[
+  {
+   "repository":  "Flex1911/android_kernel_google_msm",
+   "target_path": "kernel/google/msm",
+   "branch":      "lineage-15.0"
+  },
+  {
+   "repository":  "Flex1911/proprietary_vendor_asus",
+   "target_path": "vendor/asus",
+   "branch":      "lineage-15.0"
+  }
+]

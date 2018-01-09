@@ -1,2 +1,5 @@
 allow init diag_device:chr_file unlink;
 allow init tmpfs:lnk_file create_file_perms;
+allow init socket_device:sock_file create;
+allow init socket_device:sock_file unlink;
+

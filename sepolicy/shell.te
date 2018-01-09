@@ -1,0 +1,1 @@
+allow shell adb_keys_file:dir getattr;

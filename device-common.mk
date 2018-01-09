@@ -147,17 +147,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
 # NFC
-PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0-impl-bcm \
-    nfc_nci.bcm2079x.default \
-    libnfc-nci \
-    libnfc_nci_jni \
-    NfcNci \
-    Tag
+#PRODUCT_PACKAGES += \
+#    android.hardware.nfc@1.0-impl-bcm \
+#    nfc_nci.bcm2079x.default \
+#    libnfc-nci \
+#    libnfc_nci_jni \
+#    NfcNci \
+#    Tag
 
-PRODUCT_COPY_FILES += \
-    device/asus/flo/configs/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
-    device/asus/flo/configs/nfc/libnfc-brcm-20791b05.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm-20791b05.conf
+#PRODUCT_COPY_FILES += \
+#    device/asus/flo/configs/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+#    device/asus/flo/configs/nfc/libnfc-brcm-20791b05.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm-20791b05.conf
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -182,8 +182,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
+#   frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
+#   frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
 
 # Power

@@ -14,3 +14,9 @@ allow qmux radio_device:chr_file rw_file_perms;
 
 # wake lock access
 wakelock_use(qmux)
+
+#Zips
+allow qmux self:capability dac_override;
+allow qmux sysfs:file write;
+
+

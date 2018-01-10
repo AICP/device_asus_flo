@@ -1,0 +1,4 @@
+#============= audioserver ==============
+allow audioserver qmuxd_socket:dir search;
+allow audioserver self:socket create;
+

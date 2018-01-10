@@ -4,3 +4,4 @@ qmux_socket(rild)
 allow rild self:socket ioctl;
 allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
 allowxperm rild self:udp_socket ioctl priv_sock_ioctls;
+

@@ -32,3 +32,13 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=razor \
     BUILD_FINGERPRINT=google/razor/flo:6.0.1/MOB30X/3036618:user/release-keys \
     PRIVATE_BUILD_DESC="razor-user 6.0.1 MOB30X 3036618 release-keys"
+
+# AICP Device Maintainers
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    DEVICE_MAINTAINERS="HC (Zips)"
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+-include vendor/aicp/configs/bootanimation.mk
+

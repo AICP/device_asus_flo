@@ -1,8 +1,8 @@
 [
   {
-   "repository":  "Flex1911/android_kernel_google_msm",
+   "repository":  "LineageOS/android_kernel_google_msm",
    "target_path": "kernel/google/msm",
-   "branch":      "lineage-15.1-zram"
+   "branch":      "lineage-15.1"
   },
   {
    "repository":  "Flex1911/proprietary_vendor_asus",

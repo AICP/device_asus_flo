@@ -1,8 +1,8 @@
 [
   {
-   "repository":  "flar2/flo",
+   "repository":  "AICP/kernel_google_msm",
    "target_path": "kernel/google/msm",
-   "branch":      "ElementalX-6.00-cm"
+   "branch":      "o8.1"
   },
   {
    "repository":  "Flex1911/proprietary_vendor_asus",

@@ -1,8 +1,8 @@
 [
   {
-   "repository":  "LineageOS/android_kernel_google_msm",
+   "repository":  "flar2/flo",
    "target_path": "kernel/google/msm",
-   "branch":      "lineage-15.1"
+   "branch":      "ElementalX-7.00"
   },
   {
    "repository":  "Flex1911/proprietary_vendor_asus",

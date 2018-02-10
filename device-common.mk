@@ -199,7 +199,8 @@ PRODUCT_PACKAGES += \
     init.flo.usb.rc \
     init.recovery.flo.rc \
     ueventd.rc \
-    ueventd.flo.rc
+    ueventd.flo.rc \
+    init.elementalx.rc
 
 PRODUCT_COPY_FILES += \
     device/asus/flo/rootdir/etc/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \

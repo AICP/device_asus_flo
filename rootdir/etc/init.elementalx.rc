@@ -1,0 +1,30 @@
+on early-init
+
+write /sys/class/graphics/fb0/rgb "32768 32768 32768"
+
+on boot
+
+write /sys/kernel/mm/ksm/sleep_millisecs 1000
+write /sys/kernel/mm/ksm/pages_to_scan 256
+write /sys/kernel/mm/ksm/deferred_timer 1
+write /sys/kernel/mm/ksm/run 1
+
+write /sys/android_touch/sweep2wake 15
+write /sys/android_touch/doubletap2wake 1
+write /sys/android_touch/shortsweep 1
+write /sys/android_touch/pwrkey_suspend 0
+write /sys/android_touch/lid_suspend 1
+write /sys/android_touch/sweep2sleep  1
+write /sys/android_touch/orientation 1
+write /sys/kernel/fast_charge/force_fast_charge 1
+write /sys/module/msm_otg/parameters/usbhost_charge_mode 1
+write /sys/devices/i2c-0/0-006a/float_voltage 0
+write /sys/module/sync/parameters/fsync_enabled 1
+write /sys/module/msm_fb/parameters/backlight_dimmer 0
+
+on property:sys.boot_completed=1
+
+write /sys/block/mmcblk0/queue/scheduler fiops
+write /sys/block/mmcblk0/queue/read_ahead_kb 128
+
+write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 450000000

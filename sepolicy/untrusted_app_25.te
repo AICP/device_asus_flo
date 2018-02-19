@@ -1,1 +1,1 @@
-allow untrusted_app_25 sysfs:file read;
+allow untrusted_app_25 sysfs:file { read open getattr }; 
